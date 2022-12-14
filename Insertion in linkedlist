@@ -1,0 +1,94 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+	int info;
+	struct node *add;
+};
+struct node* insertatend(struct node* head , int info)
+{
+struct node* node1=(struct node*)malloc(sizeof(struct node));
+node1->info=info;
+node1->add=NULL;
+if(head==NULL)
+{
+	head=node1;
+}
+else{
+
+struct node* s=head;
+while(s->add!=NULL)
+{
+	s=s->add;
+}
+s->add=node1;
+}
+return head;
+}
+struct node* insertatbeg(struct node* head,int info)
+{
+	struct node* node1=(struct node*)malloc(sizeof(struct node));
+	node1->info=info;
+	node1->add=NULL;
+	node1->add=head;
+	head=node1;
+}
+struct node* insertafterk(struct node* head,int info,int dataafter)
+{
+	struct node* node1=(struct node*)malloc(sizeof(struct node));
+	node1->info=info;
+	node1->add=NULL;
+	struct node* s=head;
+	while(s->info!=dataafter)
+	{
+		s=s->add;
+	}
+	node1->add=s->add;
+	s->add=node1;
+}
+void printlinkedlist(struct node* head)
+{
+	struct node* s=head;
+	while(s!=NULL)
+	{
+		printf("%d->",s->info);
+		s=s->add;
+	}
+}
+int main()
+{
+	int info,choice,dataafter;
+	struct node* node1;
+	struct node* s;
+	struct node* head=NULL;
+	while(1){
+	
+	printf("\n 1.Insertatend =\n");
+	printf("\n 2.Insertatfront=\n");
+	printf("\n 3.Insertafter=\n");
+	printf("\n 4.Print Linked List=");
+	printf("\n exit \n");
+	printf("\n Enter choice=\n");
+	scanf("%d",&choice);
+	switch(choice)
+	{
+		case 1: printf("Enter data=");
+		        scanf("%d",&info);
+		        head=insertatend(head,info);
+		        break;
+		case 2: printf("Enter data=");
+		        scanf("%d",&info);
+		        head=insertatbeg(head,info);
+		        break;
+		case 3: printf("Enter dataftervalue=");
+		        scanf("%d",&info);
+		        scanf("%d",&dataafter);
+		        head=insertafterk(head,info,dataafter);
+		        break;
+		case 4: printlinkedlist(head);
+		        break;
+						
+		default:exit(1);
+		
+	} }
+}
